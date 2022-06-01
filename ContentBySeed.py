@@ -39,8 +39,7 @@ buttonArray = [tk.Button(text=x, width=5, command=lambda n=x: print(n)) for x in
 inputbox.pack(pady=2)
 label.pack()
 shuffleButton.pack(pady=1)
-for x in buttonArray:
-    x.pack(pady=1)
+[x.pack(pady=1) for x in buttonArray]
 
 Shuffle()
 mainWindow.mainloop()
