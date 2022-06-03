@@ -13,13 +13,16 @@ def RandomColor():
     return "#" + ''.join([random.choice('0123456789ABCDEF') for _ in range(6)]) 
       
 def RandomSeed():
-    input = inputbox.get('1.0', tk.END)
-    inputbox.delete('1.0', tk.END)
+    input = inputbox.get()
+    inputbox.delete(0, tk.END)
     with suppress(BaseException): 
         if  1 <= int(input) <= RandomLimit: 
             return int(input)
     random.seed()
     return random.randint(1,RandomLimit)
+
+def ShuffleEnter(event):
+    Shuffle()
 
 def Shuffle():
     seed = RandomSeed()
@@ -30,10 +33,12 @@ def Shuffle():
 #Prepare visuals
 mainWindow = tk.Tk()
 mainWindow.geometry('100x250')
-inputbox = tk.Text(width=10, height=1)
+inputbox = tk.Entry(width=10)
+inputbox.bind('<Return>', ShuffleEnter)
 label = tk.Label()
-shuffleButton = tk.Button(text="Shuffle", command=Shuffle)
+shuffleButton = tk.Button(text="Shuffle", command=lambda: Shuffle)
 buttonArray = [tk.Button(text=x, width=5, command=lambda n=x: print(n)) for x in range(6)]
+
 
 #Pack everything
 inputbox.pack(pady=2)
